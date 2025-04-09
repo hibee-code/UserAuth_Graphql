@@ -5,6 +5,10 @@ import { UsersService } from '../users/users.service';
 import { BiometricLoginInput, LoginInput } from './dto/login.input';
 import { RegisterInput } from './dto/register.input';
 import { User } from '../users/model/user.model';
+import { GqlAuthGuard } from './guard/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { CurrentUser } from './current_user.decorator';
+
 
 
 @Resolver()
@@ -35,4 +39,15 @@ export class AuthResolver {
     const token = this.authService.generateToken(user.id);
     return token.access_token;
   }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User)
+  async setBiometricKey(
+    @CurrentUser() user: User,
+    @Args('biometricKey') biometricKey: string,
+  ) {
+    return this.usersService.setBiometricKey(user.id, biometricKey);
+  }
+  
+
 }

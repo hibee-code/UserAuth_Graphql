@@ -20,6 +20,7 @@ type Mutation {
   biometricLogin(input: BiometricLoginInput!): String!
   login(input: LoginInput!): String!
   register(input: RegisterInput!): User!
+  setBiometricKey(biometricKey: String!): User!
 }
 
 type Query {

@@ -11,6 +11,11 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
+  async findById(userId: string) {
+    return this.prisma.user.findUnique({ where: { id: userId } });
+  }
+  
+
   async findByBiometricKey(biometricKey: string) {
     return this.prisma.user.findUnique({ where: { biometricKey } });
   }
