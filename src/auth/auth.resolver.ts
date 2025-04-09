@@ -48,6 +48,5 @@ export class AuthResolver {
   ) {
     return this.usersService.setBiometricKey(user.id, biometricKey);
   }
-  
 
 }
